@@ -13,14 +13,22 @@ namespace Nion.App.Services
 
         public ApiClient()
         {
-            _http = new HttpClient { BaseAddress = new Uri("https://localhost:7226/") };
+            _http = new HttpClient { BaseAddress = new Uri("http://192.168.0.200/") };
         }
 
         public async Task<T?> PostAsync<T>(string url, object data)
         {
-            var response = await _http.PostAsJsonAsync(url, data);
-            if (!response.IsSuccessStatusCode) return default;
-            return await response.Content.ReadFromJsonAsync<T>();
+            try
+            {
+
+                var response = await _http.PostAsJsonAsync(url, data);
+                if (!response.IsSuccessStatusCode) return default;
+                return await response.Content.ReadFromJsonAsync<T>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
