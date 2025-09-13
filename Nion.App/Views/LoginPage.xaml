@@ -27,7 +27,11 @@
                    TextColor="Black" />
 
         <Entry Placeholder="Email" Text="{Binding Email}" />
+        <Label Text="{Binding EmailError}" TextColor="Red" FontSize="12" />
+        
         <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+        <Label Text="{Binding PasswordError}" TextColor="Red" FontSize="12" />
+        
         <Button Text="Login" Command="{Binding LoginCommand}" />
         <Label Text="{Binding Message}" TextColor="Red" />
     </VerticalStackLayout>

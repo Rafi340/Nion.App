@@ -17,6 +17,8 @@ namespace Nion.App.ViewModels
         [ObservableProperty] private string email;
         [ObservableProperty] private string password;
         [ObservableProperty] private string message;
+        [ObservableProperty] private string emailError;
+        [ObservableProperty] private string passwordError;
 
         public LoginViewModel(IAuthService authService)
         {
@@ -26,6 +28,33 @@ namespace Nion.App.ViewModels
         [RelayCommand]
         private async Task LoginAsync()
         {
+            EmailError = password = string.Empty;
+
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                EmailError = "Email is required.";
+                hasError = true;
+            }
+            else if (!Email.Contains("@"))
+            {
+                EmailError = "Invalid email format.";
+                hasError = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                PasswordError = "Password is required.";
+                hasError = true;
+            }
+            else if (Password.Length < 6)
+            {
+                PasswordError = "Password must be at least 6 characters.";
+                hasError = true;
+            }
+
+            if (hasError) return;
             var response = await _authService.LoginAsync(new LoginModel
             {
                 Email = email,
