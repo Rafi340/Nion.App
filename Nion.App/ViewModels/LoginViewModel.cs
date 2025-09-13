@@ -26,28 +26,16 @@ namespace Nion.App.ViewModels
         [RelayCommand]
         private async Task LoginAsync()
         {
-            try
+            var response = await _authService.LoginAsync(new LoginModel
             {
-                var response = await _authService.LoginAsync(new LoginModel
-                {
-                    Email = email,
-                    Password = password
-                });
+                Email = email,
+                Password = password
+            });
 
-                if (response != null && response.Success)
-                {
-                    Message = "Login successful!";
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
-                }
-                else
-                {
-                    Message = response?.Message ?? "Login failed!";
-                }
-            }
-            catch (Exception ex)
-            {
-                Message = $"Error: {ex.Message}";
-            }
+            if (response != null && response.Success)
+                message = "Login successful!";
+            else
+                message = response?.Message ?? "Login failed!";
         }
     }
 }

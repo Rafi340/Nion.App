@@ -7,6 +7,25 @@
    
 
     <VerticalStackLayout Padding="30" Spacing="20">
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+            <Image Source="logo.png"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       BackgroundColor="#6366F1" />
+            
+            <Label Text="ExamPro"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <Label Text="Welcome to ExamPro! 👋"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Black" />
+
         <Entry Placeholder="Email" Text="{Binding Email}" />
         <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
         <Button Text="Login" Command="{Binding LoginCommand}" />
